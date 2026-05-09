@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumine Estética Avançada | Clínica de Estética Premium</title>
+  <meta name="description" content="Clínica de estética premium especializada em limpeza de pele, harmonização facial, protocolos corporais, rejuvenescimento e bem-estar. Agende sua avaliação pelo WhatsApp." />
+
+  <style>
+    :root {
+      --rose: #d8a7a0;
+      --rose-dark: #b87972;
+      --gold: #c7a35a;
+      --gold-light: #f1dfb9;
+      --cream: #fff8f1;
+      --white: #ffffff;
+      --dark: #2c2421;
+      --muted: #7b6d67;
+      --green: #6f7f63;
+      --shadow: 0 20px 60px rgba(44, 36, 33, 0.12);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      background: linear-gradient(90deg, var(--dark), #4d3b34);
+      color: var(--cream);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255, 248, 241, 0.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(199, 163, 90, 0.18);
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      font-size: 22px;
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--gold));
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 12px 30px rgba(199, 163, 90, 0.28);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .menu a {
+      transition: 0.3s ease;
+    }
+
+    .menu a:hover {
+      color: var(--rose-dark);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: 0.3s ease;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--rose-dark), var(--gold));
+      box-shadow: 0 14px 34px rgba(184, 121, 114, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 44px rgba(184, 121, 114, 0.38);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--dark);
+      border: 1px solid rgba(199, 163, 90, 0.28);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      padding: 90px 0 70px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 580px;
+      height: 580px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216, 167, 160, 0.38), transparent 68%);
+      top: -160px;
+      right: -160px;
+      z-index: -1;
+      animation: floatGlow 6s ease-in-out infinite alternate;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(199, 163, 90, 0.24);
+      padding: 10px 16px;
+      border-radius: 999px;
+      color: var(--rose-dark);
+      font-weight: 800;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 28px rgba(44, 36, 33, 0.06);
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--rose-dark), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 19px;
+      max-width: 610px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .trust-row {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item strong {
+      font-size: 26px;
+      display: block;
+      color: var(--dark);
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-card {
+      position: relative;
+      background: linear-gradient(180deg, #ffffff, #fff5ec);
+      border-radius: 44px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(199, 163, 90, 0.22);
+      animation: floatCard 4s ease-in-out infinite alternate;
+    }
+
+    .hero-photo {
+      min-height: 540px;
+      border-radius: 34px;
+      background:
+        linear-gradient(rgba(44, 36, 33, 0.08), rgba(44, 36, 33, 0.18)),
+        url("https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80");
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .floating-badge {
+      position: absolute;
+      bottom: 26px;
+      left: 26px;
+      right: 26px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      border-radius: 26px;
+      padding: 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .floating-badge h3 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .floating-badge p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 85px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px;
+    }
+
+    .section-head .mini {
+      color: var(--rose-dark);
+      font-weight: 900;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(199, 163, 90, 0.2);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 12px 35px rgba(44, 36, 33, 0.06);
+      transition: 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+      border-color: rgba(199, 163, 90, 0.42);
+    }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(216, 167, 160, 0.18), rgba(199, 163, 90, 0.18));
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .card ul {
+      list-style: none;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .card li {
+      margin: 8px 0;
+    }
+
+    .card li::before {
+      content: "✦";
+      color: var(--gold);
+      margin-right: 8px;
+    }
+
+    .about {
+      background: linear-gradient(135deg, #fff, #fff3eb);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-image {
+      min-height: 520px;
+      border-radius: 42px;
+      background:
+        linear-gradient(rgba(44, 36, 33, 0.08), rgba(44, 36, 33, 0.1)),
+        url("https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=900&q=80");
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow);
+    }
+
+    .about-content h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      margin: 28px 0;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(199, 163, 90, 0.18);
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid rgba(199, 163, 90, 0.18);
+      box-shadow: 0 10px 32px rgba(44, 36, 33, 0.05);
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--dark);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .booking {
+      background:
+        radial-gradient(circle at top left, rgba(216, 167, 160, 0.28), transparent 35%),
+        linear-gradient(135deg, #2c2421, #4d3b34);
+      color: white;
+      overflow: hidden;
+    }
+
+    .booking .section-head p,
+    .booking .section-head .mini {
+      color: var(--gold-light);
+    }
+
+    .booking h2 {
+      color: white;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .booking-info {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 32px;
+      padding: 30px;
+      backdrop-filter: blur(14px);
+    }
+
+    .booking-info h3 {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .booking-info p {
+      color: rgba(255, 255, 255, 0.74);
+      margin-bottom: 20px;
+    }
+
+    .booking-form {
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--dark);
+      padding: 28px;
+      border-radius: 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--dark);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(44, 36, 33, 0.14);
+      border-radius: 16px;
+      padding: 15px 16px;
+      font-size: 15px;
+      outline: none;
+      background: #fffaf5;
+      color: var(--dark);
+      transition: 0.25s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(199, 163, 90, 0.14);
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .calendar-wrap {
+      margin-top: 18px;
+      background: #fffaf5;
+      border: 1px solid rgba(44, 36, 33, 0.1);
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .calendar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .calendar-head button {
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: var(--dark);
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .calendar-title {
+      font-weight: 900;
+      text-transform: capitalize;
+    }
+
+    .weekdays,
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+
+    .weekdays span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+      padding: 6px 0;
+    }
+
+    .day {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 1px solid rgba(44, 36, 33, 0.08);
+      background: white;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .day:hover {
+      background: var(--gold-light);
+    }
+
+    .day.empty {
+      visibility: hidden;
+    }
+
+    .day.disabled {
+      opacity: 0.34;
+      cursor: not-allowed;
+      background: #eee;
+    }
+
+    .day.selected {
+      background: linear-gradient(135deg, var(--rose-dark), var(--gold));
+      color: white;
+      border-color: transparent;
+    }
+
+    .testimonials {
+      background: #fffaf5;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 12px 34px rgba(44, 36, 33, 0.06);
+      border: 1px solid rgba(199, 163, 90, 0.18);
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .testimonial-card strong {
+      display: block;
+    }
+
+    .cta-final {
+      text-align: center;
+      background:
+        linear-gradient(rgba(44, 36, 33, 0.68), rgba(44, 36, 33, 0.68)),
+        url("https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1400&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      border-radius: 44px;
+      padding: 70px 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-final h2 {
+      font-size: clamp(32px, 4vw, 56px);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      letter-spacing: -1.5px;
+    }
+
+    .cta-final p {
+      max-width: 680px;
+      margin: 0 auto 26px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 18px;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 46px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 26px;
+      margin-bottom: 28px;
+    }
+
+    footer p, footer a {
+      color: rgba(255, 255, 255, 0.7);
+      display: block;
+      margin: 8px 0;
+    }
+
+    footer h4 {
+      margin-bottom: 12px;
+      color: var(--gold-light);
+    }
+
+    .copy {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 22px;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 9999;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #25d366;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      box-shadow: 0 12px 34px rgba(37, 211, 102, 0.36);
+      animation: pulseWpp 1.8s infinite;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: 0.75s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes floatGlow {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(24px) scale(1.05); }
+    }
+
+    @keyframes floatCard {
+      from { transform: translateY(0); }
+      to { transform: translateY(-12px); }
+    }
+
+    @keyframes pulseWpp {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+      70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    @media (max-width: 980px) {
+      .menu {
+        position: fixed;
+        top: 78px;
+        left: 0;
+        width: 100%;
+        padding: 22px;
+        background: rgba(255, 248, 241, 0.98);
+        flex-direction: column;
+        align-items: flex-start;
+        display: none;
+        border-bottom: 1px solid rgba(199, 163, 90, 0.18);
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .booking-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-photo,
+      .about-image {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .top-bar {
+        font-size: 12px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .logo-mark {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero {
+        padding: 56px 0 46px;
+      }
+
+      h1 {
+        letter-spacing: -1.6px;
+      }
+
+      .cards,
+      .steps,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      section {
+        padding: 62px 0;
+      }
+
+      .hero-photo {
+        min-height: 390px;
+      }
+
+      .floating-badge {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .calendar-days,
+      .weekdays {
+        gap: 5px;
+      }
+
+      .day {
+        border-radius: 9px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    ✨ Avaliação estética personalizada | Atendimento humanizado | Agendamento rápido pelo WhatsApp
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="logo">
+        <span class="logo-mark">✦</span>
+        <span>Lumine Estética</span>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="#procedimentos">Procedimentos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#agendamento">Agendamento</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+        <a href="#agendamento" class="btn btn-primary">Agendar avaliação</a>
+      </nav>
+
+      <div class="mobile-toggle" id="mobileToggle">☰</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="tag">💎 Clínica premium de estética avançada</div>
+          <h1>Realce sua beleza com <span class="gradient-text">naturalidade, cuidado e tecnologia.</span></h1>
+          <p>
+            Protocolos faciais e corporais pensados para valorizar sua autoestima com segurança,
+            atendimento exclusivo e uma experiência premium do primeiro contato ao pós-procedimento.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#agendamento" class="btn btn-primary">✨ Quero agendar minha avaliação</a>
+            <a href="#procedimentos" class="btn btn-secondary">Ver procedimentos</a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-item">
+              <strong>+1.200</strong>
+              <span>atendimentos realizados</span>
+            </div>
+            <div class="trust-item">
+              <strong>4.9★</strong>
+              <span>experiência das clientes</span>
+            </div>
+            <div class="trust-item">
+              <strong>100%</strong>
+              <span>protocolos personalizados</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="hero-photo">
+            <div class="floating-badge">
+              <h3>Experiência Lumine</h3>
+              <p>Ambiente sofisticado, protocolos modernos e atendimento acolhedor para você se sentir segura.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="procedimentos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">Procedimentos</div>
+          <h2>Tratamentos que combinam estética, bem-estar e resultado.</h2>
+          <p>Escolha o protocolo ideal para sua necessidade ou agende uma avaliação para receber uma indicação personalizada.</p>
+        </div>
+
+        <div class="cards">
+          <div class="card reveal">
+            <div class="icon">🌸</div>
+            <h3>Estética Facial</h3>
+            <p>Cuidados para pele mais luminosa, saudável e com aparência renovada.</p>
+            <ul>
+              <li>Limpeza de pele premium</li>
+              <li>Peeling e revitalização</li>
+              <li>Microagulhamento</li>
+              <li>Protocolos para acne e manchas</li>
+            </ul>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">💉</div>
+            <h3>Harmonização</h3>
+            <p>Procedimentos para realçar traços com equilíbrio, naturalidade e segurança.</p>
+            <ul>
+              <li>Toxina botulínica</li>
+              <li>Preenchimento facial</li>
+              <li>Bioestimuladores</li>
+              <li>Rejuvenescimento facial</li>
+            </ul>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">✨</div>
+            <h3>Estética Corporal</h3>
+            <p>Protocolos para contorno corporal, retenção, celulite e sensação de leveza.</p>
+            <ul>
+              <li>Drenagem linfática</li>
+              <li>Gordura localizada</li>
+              <li>Flacidez corporal</li>
+              <li>Modelagem corporal</li>
+            </ul>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🧴</div>
+            <h3>Skin Care Profissional</h3>
+            <p>Rotina guiada para melhorar textura, hidratação, luminosidade e viço da pele.</p>
+            <ul>
+              <li>Análise de pele</li>
+              <li>Rotina personalizada</li>
+              <li>Hidratação profunda</li>
+              <li>Home care orientado</li>
+            </ul>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🌿</div>
+            <h3>Bem-estar</h3>
+            <p>Um momento para desacelerar, cuidar de si e sair renovada.</p>
+            <ul>
+              <li>Massagem relaxante</li>
+              <li>Spa facial</li>
+              <li>Rituais de autocuidado</li>
+              <li>Experiência sensorial</li>
+            </ul>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">👑</div>
+            <h3>Planos Personalizados</h3>
+            <p>Combinação estratégica de procedimentos para evolução contínua.</p>
+            <ul>
+              <li>Plano mensal</li>
+              <li>Acompanhamento individual</li>
+              <li>Pacotes especiais</li>
+              <li>Protocolos exclusivos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="sobre">
+      <div class="container about-grid">
+        <div class="about-image reveal"></div>
+
+        <div class="about-content reveal">
+          <div class="tag">Sobre a Lumine</div>
+          <h2>Uma clínica criada para mulheres que desejam se cuidar com segurança e sofisticação.</h2>
+          <p>
+            A Lumine Estética Avançada une atendimento humanizado, protocolos modernos e um ambiente premium
+            para entregar uma experiência completa de beleza e autocuidado.
+          </p>
+          <p>
+            Aqui, cada cliente recebe uma avaliação individual para que o tratamento seja indicado de acordo
+            com seus objetivos, rotina e características pessoais.
+          </p>
+
+          <div class="check-list">
+            <div class="check">✓ Avaliação personalizada antes do procedimento</div>
+            <div class="check">✓ Ambiente elegante, confortável e acolhedor</div>
+            <div class="check">✓ Protocolos faciais e corporais sob medida</div>
+            <div class="check">✓ Agendamento rápido e prático pelo WhatsApp</div>
+          </div>
+
+          <a href="#agendamento" class="btn btn-primary">Agendar avaliação agora</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">Como funciona</div>
+          <h2>Seu atendimento em 4 passos simples.</h2>
+          <p>Do primeiro contato ao acompanhamento, tudo foi pensado para ser fácil, elegante e eficiente.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-number">1</div>
+            <h3>Escolha o protocolo</h3>
+            <p>Você seleciona o tratamento desejado ou agenda uma avaliação.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-number">2</div>
+            <h3>Selecione a data</h3>
+            <p>Use o calendário do site para escolher uma data disponível.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-number">3</div>
+            <h3>Envie pelo WhatsApp</h3>
+            <p>O pedido de agendamento chega pronto para a equipe responder.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-number">4</div>
+            <h3>Receba confirmação</h3>
+            <p>A clínica confirma horário, procedimento e orientações.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking" id="agendamento">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">Agendamento online</div>
+          <h2>Escolha sua data e envie sua solicitação pelo WhatsApp.</h2>
+          <p>O calendário cobre o ano inteiro e gera uma mensagem automática com seus dados.</p>
+        </div>
+
+        <div class="booking-grid">
+          <div class="booking-info reveal">
+            <h3>Agende sua avaliação estética</h3>
+            <p>
+              Preencha o formulário ao lado, selecione uma data no calendário e clique em enviar.
+              Você será direcionada para o WhatsApp com uma mensagem pronta.
+            </p>
+            <p>
+              <strong>Horários de atendimento:</strong><br>
+              Segunda a sexta: 08h às 19h<br>
+              Sábado: 08h às 13h
+            </p>
+            <p>
+              <strong>Endereço:</strong><br>
+              Goiânia, GO — endereço completo da clínica
+            </p>
+            <a href="javascript:void(0)" onclick="openDirectWhatsApp()" class="btn btn-primary">💬 Chamar direto no WhatsApp</a>
+          </div>
+
+          <form class="booking-form reveal" id="bookingForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Nome completo</label>
+                <input type="text" id="name" placeholder="Digite seu nome" required />
+              </div>
+
+              <div class="field">
+                <label for="phone">Telefone</label>
+                <input type="tel" id="phone" placeholder="(62) 99999-9999" required />
+              </div>
+
+              <div class="field">
+                <label for="procedure">Procedimento</label>
+                <select id="procedure" required>
+                  <option value="">Selecione</option>
+                  <option>Limpeza de pele premium</option>
+                  <option>Toxina botulínica</option>
+                  <option>Preenchimento facial</option>
+                  <option>Bioestimulador de colágeno</option>
+                  <option>Microagulhamento</option>
+                  <option>Drenagem linfática</option>
+                  <option>Protocolo corporal</option>
+                  <option>Avaliação estética personalizada</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="time">Melhor horário</label>
+                <select id="time" required>
+                  <option value="">Selecione</option>
+                  <option>08:00</option>
+                  <option>09:00</option>
+                  <option>10:00</option>
+                  <option>11:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                  <option>17:00</option>
+                  <option>18:00</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="message">Observação</label>
+                <textarea id="message" placeholder="Ex: Tenho interesse em melhorar manchas, acne, flacidez..."></textarea>
+              </div>
+            </div>
+
+            <input type="hidden" id="selectedDate" required />
+
+            <div class="calendar-wrap">
+              <div class="calendar-head">
+                <button type="button" id="prevMonth">‹</button>
+                <div class="calendar-title" id="calendarTitle"></div>
+                <button type="button" id="nextMonth">›</button>
+              </div>
+
+              <div class="weekdays">
+                <span>Dom</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sáb</span>
+              </div>
+
+              <div class="calendar-days" id="calendarDays"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; margin-top:18px;">
+              Enviar agendamento pelo WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="depoimentos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">Experiência das clientes</div>
+          <h2>Autoestima, cuidado e confiança em cada atendimento.</h2>
+          <p>Depoimentos ilustrativos para demonstrar o espaço da seção. Substitua por avaliações reais da cliente.</p>
+        </div>
+
+        <div class="cards">
+          <div class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Atendimento impecável. Me senti acolhida desde o primeiro contato e amei o resultado da limpeza de pele.”</p>
+            <strong>Marina A.</strong>
+            <span>Cliente Lumine</span>
+          </div>
+
+          <div class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>“A clínica é linda, organizada e transmite muita confiança. O protocolo foi explicado com muito cuidado.”</p>
+            <strong>Camila R.</strong>
+            <span>Cliente Lumine</span>
+          </div>
+
+          <div class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Gostei porque o atendimento não foi empurrado. Fizeram avaliação e indicaram exatamente o que eu precisava.”</p>
+            <strong>Juliana M.</strong>
+            <span>Cliente Lumine</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="cta-final reveal">
+          <h2>Pronta para viver sua melhor versão?</h2>
+          <p>
+            Agende agora uma avaliação estética e descubra o protocolo ideal para realçar sua beleza com naturalidade.
+          </p>
+          <a href="#agendamento" class="btn btn-primary">Quero agendar minha avaliação</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h4>Lumine Estética Avançada</h4>
+        <p>Clínica premium de estética facial, corporal e bem-estar.</p>
+        <p>Goiânia, Goiás</p>
+      </div>
+
+      <div>
+        <h4>Menu</h4>
+        <a href="#procedimentos">Procedimentos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#agendamento">Agendamento</a>
+        <a href="#depoimentos">Depoimentos</a>
+      </div>
+
+      <div>
+        <h4>Contato</h4>
+        <a href="javascript:void(0)" onclick="openDirectWhatsApp()">WhatsApp</a>
+        <a href="#">Instagram</a>
+        <a href="#">Google Maps</a>
+      </div>
+    </div>
+
+    <div class="container copy">
+      © 2026 Lumine Estética Avançada. Todos os direitos reservados. Site desenvolvido para apresentação comercial.
+    </div>
+  </footer>
+
+  <a href="javascript:void(0)" onclick="openDirectWhatsApp()" class="whatsapp-float" aria-label="Chamar no WhatsApp">
+    ☎
+  </a>
+
+  <script>
+    const WHATSAPP_NUMBER = "5562999999999";
+
+    const menu = document.getElementById("menu");
+    const mobileToggle = document.getElementById("mobileToggle");
+
+    mobileToggle.addEventListener("click", () => {
+      menu.classList.toggle("active");
+      mobileToggle.textContent = menu.classList.contains("active") ? "×" : "☰";
+    });
+
+    document.querySelectorAll(".menu a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("active");
+        mobileToggle.textContent = "☰";
+      });
+    });
+
+    function openDirectWhatsApp() {
+      const text = encodeURIComponent(
+        "Olá! Vim pelo site da Lumine Estética e gostaria de agendar uma avaliação."
+      );
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+    }
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+      revealElements.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const visiblePoint = 120;
+
+        if (elementTop < windowHeight - visiblePoint) {
+          el.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+
+    const calendarTitle = document.getElementById("calendarTitle");
+    const calendarDays = document.getElementById("calendarDays");
+    const selectedDateInput = document.getElementById("selectedDate");
+    const prevMonthBtn = document.getElementById("prevMonth");
+    const nextMonthBtn = document.getElementById("nextMonth");
+
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    let selectedDate = null;
+
+    const monthNames = [
+      "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    ];
+
+    function renderCalendar() {
+      calendarDays.innerHTML = "";
+      calendarTitle.textContent = `${monthNames[currentMonth]} de ${currentYear}`;
+
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement("div");
+        empty.classList.add("day", "empty");
+        calendarDays.appendChild(empty);
+      }
+
+      for (let day = 1; day <= lastDate; day++) {
+        const dayEl = document.createElement("button");
+        dayEl.type = "button";
+        dayEl.classList.add("day");
+        dayEl.textContent = day;
+
+        const thisDate = new Date(currentYear, currentMonth, day);
+        const isPast = thisDate.setHours(0,0,0,0) < new Date().setHours(0,0,0,0);
+        const isSunday = new Date(currentYear, currentMonth, day).getDay() === 0;
+
+        if (isPast || isSunday) {
+          dayEl.classList.add("disabled");
+          dayEl.disabled = true;
+        }
+
+        const formatted = formatDate(currentYear, currentMonth, day);
+
+        if (selectedDate === formatted) {
+          dayEl.classList.add("selected");
+        }
+
+        dayEl.addEventListener("click", () => {
+          selectedDate = formatted;
+          selectedDateInput.value = formatted;
+          renderCalendar();
+        });
+
+        calendarDays.appendChild(dayEl);
+      }
+
+      const currentView = new Date(currentYear, currentMonth, 1);
+      const minView = new Date(today.getFullYear(), today.getMonth(), 1);
+      prevMonthBtn.disabled = currentView <= minView;
+      prevMonthBtn.style.opacity = prevMonthBtn.disabled ? "0.35" : "1";
+      prevMonthBtn.style.cursor = prevMonthBtn.disabled ? "not-allowed" : "pointer";
+    }
+
+    function formatDate(year, month, day) {
+      const dd = String(day).padStart(2, "0");
+      const mm = String(month + 1).padStart(2, "0");
+      return `${dd}/${mm}/${year}`;
+    }
+
+    prevMonthBtn.addEventListener("click", () => {
+      if (currentMonth === 0) {
+        currentMonth = 11;
+        currentYear--;
+      } else {
+        currentMonth--;
+      }
+      renderCalendar();
+    });
+
+    nextMonthBtn.addEventListener("click", () => {
+      if (currentMonth === 11) {
+        currentMonth = 0;
+        currentYear++;
+      } else {
+        currentMonth++;
+      }
+      renderCalendar();
+    });
+
+    renderCalendar();
+
+    const bookingForm = document.getElementById("bookingForm");
+
+    bookingForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const procedure = document.getElementById("procedure").value;
+      const time = document.getElementById("time").value;
+      const message = document.getElementById("message").value.trim();
+      const date = selectedDateInput.value;
+
+      if (!name || !phone || !procedure || !time || !date) {
+        alert("Por favor, preencha todos os campos obrigatórios e selecione uma data no calendário.");
+        return;
+      }
+
+      const whatsappMessage = `
+Olá! Vim pelo site da Lumine Estética e gostaria de solicitar um agendamento.
+
+Nome: ${name}
+Telefone: ${phone}
+Procedimento: ${procedure}
+Data desejada: ${date}
+Horário desejado: ${time}
+Observação: ${message || "Sem observações"}
+
+Pode confirmar a disponibilidade?
+      `;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
