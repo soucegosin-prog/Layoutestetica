@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="Lumière Estética — Clínica de estética avançada em Goiânia. Harmonização facial, depilação a laser, tratamentos faciais e corporais. Agende sua consulta.">
+<title>Lumière Estética — Clínica de Estética Avançada em Goiânia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          cream: '#FAF7F2',
+          beige: '#F0E8DC',
+          gold: {
+            DEFAULT: '#C9A961',
+            dark: '#A68842',
+            light: '#E0C988',
+          },
+          ink: '#1A1614',
+          rose: '#E8C4C4',
+        },
+        animation: {
+          'fade-up': 'fadeUp 0.7s ease-out forwards',
+          'fade-in': 'fadeIn 1s ease-out forwards',
+          'float': 'float 3s ease-in-out infinite',
+        },
+        keyframes: {
+          fadeUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+          float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-8px)' } },
+        }
+      }
+    }
+  }
+</script>
+<style>
+  * { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #FAF7F2; color: #1A1614; overflow-x: hidden; }
+  .font-serif { font-family: 'Playfair Display', serif; }
+  .hero-gradient { background: linear-gradient(135deg, rgba(26,22,20,0.65) 0%, rgba(26,22,20,0.35) 50%, rgba(201,169,97,0.25) 100%); }
+  .text-balance { text-wrap: balance; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.show { opacity: 1; transform: translateY(0); }
+  .card-hover { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -15px rgba(26,22,20,0.15); }
+  .gold-divider { width: 60px; height: 2px; background: linear-gradient(90deg, #C9A961, #E0C988); }
+  .whatsapp-pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+  .grain { position: relative; }
+  .grain::after { content:''; position:absolute; inset:0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); pointer-events:none; mix-blend-mode:overlay; }
+
+  /* Modal */
+  .modal-overlay { backdrop-filter: blur(8px); }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #C9A961; box-shadow: 0 0 0 3px rgba(201,169,97,0.15); }
+
+  /* Menu mobile */
+  .mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .mobile-menu.open { transform: translateX(0); }
+</style>
+</head>
+<body class="bg-cream">
+
+<!-- ============ HEADER ============ -->
+<header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" id="header">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-cream font-serif font-bold text-lg">L</div>
+      <div>
+        <div class="font-serif text-xl text-ink font-bold leading-none">Lumière</div>
+        <div class="text-[10px] uppercase tracking-[0.2em] text-gold-dark mt-0.5">Estética Avançada</div>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm">
+      <a href="#sobre" class="text-ink/80 hover:text-gold transition">Sobre</a>
+      <a href="#procedimentos" class="text-ink/80 hover:text-gold transition">Procedimentos</a>
+      <a href="#resultados" class="text-ink/80 hover:text-gold transition">Resultados</a>
+      <a href="#depoimentos" class="text-ink/80 hover:text-gold transition">Depoimentos</a>
+      <a href="#localizacao" class="text-ink/80 hover:text-gold transition">Localização</a>
+      <button onclick="openAgenda()" class="bg-ink text-cream px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-gold transition">Agendar</button>
+    </nav>
+
+    <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5" aria-label="Menu">
+      <span class="w-6 h-0.5 bg-ink"></span>
+      <span class="w-6 h-0.5 bg-ink"></span>
+      <span class="w-6 h-0.5 bg-ink"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Menu Mobile -->
+<div class="mobile-menu fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-cream z-50 shadow-2xl" id="mobileMenu">
+  <div class="p-6 flex justify-end">
+    <button onclick="toggleMobileMenu()" class="text-3xl text-ink">×</button>
+  </div>
+  <nav class="px-6 py-4 flex flex-col gap-2 text-lg">
+    <a href="#sobre" onclick="toggleMobileMenu()" class="py-3 border-b border-ink/10">Sobre</a>
+    <a href="#procedimentos" onclick="toggleMobileMenu()" class="py-3 border-b border-ink/10">Procedimentos</a>
+    <a href="#resultados" onclick="toggleMobileMenu()" class="py-3 border-b border-ink/10">Resultados</a>
+    <a href="#depoimentos" onclick="toggleMobileMenu()" class="py-3 border-b border-ink/10">Depoimentos</a>
+    <a href="#localizacao" onclick="toggleMobileMenu()" class="py-3 border-b border-ink/10">Localização</a>
+    <button onclick="toggleMobileMenu(); openAgenda();" class="mt-6 bg-ink text-cream py-4 rounded-full text-sm font-semibold uppercase tracking-wider">Agendar Consulta</button>
+    <a href="https://wa.me/5562981615395?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20os%20tratamentos." class="mt-3 bg-[#25D366] text-white py-4 rounded-full text-sm font-semibold uppercase tracking-wider text-center">WhatsApp</a>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden grain">
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="" class="w-full h-full object-cover">
+    <div class="absolute inset-0 hero-gradient"></div>
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto text-center">
+    <div class="reveal show">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40 text-gold-light text-xs uppercase tracking-[0.25em] mb-6">Goiânia · desde 2014</span>
+    </div>
+    <h1 class="font-serif text-cream text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] text-balance reveal show" style="animation-delay: 0.1s">
+      Sua melhor versão <br><em class="italic font-medium text-gold-light">começa aqui.</em>
+    </h1>
+    <p class="mt-8 text-cream/85 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed reveal show" style="animation-delay: 0.2s">
+      Tratamentos estéticos faciais e corporais com tecnologia de ponta, conduzidos por profissionais especialistas. Resultados reais, atendimento humanizado.
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center reveal show" style="animation-delay: 0.3s">
+      <button onclick="openAgenda()" class="group bg-gold hover:bg-gold-dark text-ink px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider transition flex items-center gap-2 shadow-2xl">
+        Agendar minha consulta
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </button>
+      <a href="#procedimentos" class="text-cream/90 hover:text-gold transition px-6 py-4 text-sm uppercase tracking-wider border-b border-cream/30">
+        Ver tratamentos
+      </a>
+    </div>
+
+    <div class="mt-16 flex flex-wrap gap-6 md:gap-12 justify-center text-cream/80 reveal show" style="animation-delay: 0.4s">
+      <div class="text-center"><div class="font-serif text-3xl text-gold-light">12+</div><div class="text-xs uppercase tracking-wider mt-1">anos de mercado</div></div>
+      <div class="text-center"><div class="font-serif text-3xl text-gold-light">3k+</div><div class="text-xs uppercase tracking-wider mt-1">clientes satisfeitas</div></div>
+      <div class="text-center"><div class="font-serif text-3xl text-gold-light">98%</div><div class="text-xs uppercase tracking-wider mt-1">avaliação positiva</div></div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/60 text-xs uppercase tracking-[0.3em] flex flex-col items-center gap-2 animate-float">
+    <span>role</span>
+    <div class="w-px h-8 bg-gradient-to-b from-gold to-transparent"></div>
+  </div>
+</section>
+
+<!-- ============ SOBRE ============ -->
+<section id="sobre" class="py-24 md:py-32 px-6">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <div class="relative">
+        <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Profissional da Lumière" class="w-full rounded-lg shadow-2xl">
+        <div class="absolute -bottom-6 -right-6 bg-gold p-6 rounded-lg shadow-xl hidden md:block">
+          <div class="font-serif text-4xl text-ink leading-none">Dra. Helena</div>
+          <div class="text-xs uppercase tracking-wider text-ink/70 mt-1">Diretora · CRM 12345</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay: 0.1s">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">sobre a clínica</span>
+      <div class="gold-divider mt-3 mb-6"></div>
+      <h2 class="font-serif text-4xl md:text-5xl text-ink font-bold leading-tight text-balance">
+        Onde técnica e <em class="italic text-gold-dark">cuidado</em> se encontram.
+      </h2>
+      <p class="mt-6 text-ink/75 leading-relaxed text-lg">
+        A <strong class="text-ink">Lumière Estética</strong> nasceu com uma missão clara: oferecer tratamentos que valorizam sua beleza natural sem exageros. Cada protocolo é desenhado de forma personalizada, respeitando suas características e seus objetivos.
+      </p>
+      <p class="mt-4 text-ink/70 leading-relaxed">
+        Nossa equipe é formada por médicos, biomédicos e esteticistas com mais de 12 anos de experiência. Trabalhamos com as marcas mais respeitadas do mercado e investimos continuamente em tecnologia e capacitação.
+      </p>
+      <div class="mt-8 grid grid-cols-2 gap-4">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-ink text-sm">Profissionais especialistas</div>
+            <div class="text-xs text-ink/60 mt-1">Equipe com registro ativo</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-ink text-sm">Tecnologia de ponta</div>
+            <div class="text-xs text-ink/60 mt-1">Equipamentos certificados</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-ink text-sm">Atendimento humano</div>
+            <div class="text-xs text-ink/60 mt-1">Você é prioridade aqui</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-ink text-sm">Ambiente acolhedor</div>
+            <div class="text-xs text-ink/60 mt-1">Espaço pensado pra você</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCEDIMENTOS ============ -->
+<section id="procedimentos" class="py-24 md:py-32 px-6 bg-beige/50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">tratamentos</span>
+      <div class="gold-divider mx-auto mt-3 mb-6"></div>
+      <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ink font-bold leading-tight text-balance max-w-3xl mx-auto">
+        Os procedimentos mais <em class="italic text-gold-dark">desejados</em>, com excelência.
+      </h2>
+      <p class="mt-6 text-ink/70 max-w-2xl mx-auto text-lg">
+        Cada tratamento é personalizado após avaliação individual. Confira nossos protocolos mais procurados.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="reveal bg-cream rounded-lg overflow-hidden card-hover">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Harmonização Facial" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div>
+        <div class="p-6">
+          <h3 class="font-serif text-2xl text-ink font-bold">Harmonização Facial</h3>
+          <p class="mt-3 text-ink/70 text-sm leading-relaxed">Botox, preenchimento labial, contorno mandibular e bioestimuladores. Realce sua beleza natural com resultados sutis e elegantes.</p>
+          <button onclick="openAgenda('Harmonização Facial')" class="mt-5 text-gold-dark text-sm font-semibold uppercase tracking-wider hover:gap-3 inline-flex items-center gap-2 transition-all">
+            Quero agendar →
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal bg-cream rounded-lg overflow-hidden card-hover" style="transition-delay: 0.1s">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Depilação a Laser" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div>
+        <div class="p-6">
+          <h3 class="font-serif text-2xl text-ink font-bold">Depilação a Laser</h3>
+          <p class="mt-3 text-ink/70 text-sm leading-relaxed">Laser de diodo de última geração. Indolor, rápido, eficaz em todos os tipos de pele. Liberdade de verdade.</p>
+          <button onclick="openAgenda('Depilação a Laser')" class="mt-5 text-gold-dark text-sm font-semibold uppercase tracking-wider hover:gap-3 inline-flex items-center gap-2 transition-all">
+            Quero agendar →
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal bg-cream rounded-lg overflow-hidden card-hover" style="transition-delay: 0.2s">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Limpeza de Pele" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div>
+        <div class="p-6">
+          <h3 class="font-serif text-2xl text-ink font-bold">Limpeza de Pele Profunda</h3>
+          <p class="mt-3 text-ink/70 text-sm leading-relaxed">Hidratação, extração, peelings químicos e enzimáticos. Sua pele renovada, leve e radiante.</p>
+          <button onclick="openAgenda('Limpeza de Pele Profunda')" class="mt-5 text-gold-dark text-sm font-semibold uppercase tracking-wider hover:gap-3 inline-flex items-center gap-2 transition-all">
+            Quero agendar →
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal bg-cream rounded-lg overflow-hidden card-hover" style="transition-delay: 0.3s">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Microagulhamento" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div>
+        <div class="p-6">
+          <h3 class="font-serif text-2xl text-ink font-bold">Microagulhamento</h3>
+          <p class="mt-3 text-ink/70 text-sm leading-relaxed">Estímulo de colágeno e tratamento de cicatrizes, manchas e poros dilatados. Pele firme e uniforme.</p>
+          <button onclick="openAgenda('Microagulhamento')" class="mt-5 text-gold-dark text-sm font-semibold uppercase tracking-wider hover:gap-3 inline-flex items-center gap-2 transition-all">
+            Quero agendar →
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal bg-cream rounded-lg overflow-hidden card-hover" style="transition-delay: 0.4s">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tratamento Corporal" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div>
+        <div class="p-6">
+          <h3 class="font-serif text-2xl text-ink font-bold">Modelagem Corporal</h3>
+          <p class="mt-3 text-ink/70 text-sm leading-relaxed">Criolipólise, radiofrequência, drenagem e ultrassom. Defina contornos e reduza medidas.</p>
+          <button onclick="openAgenda('Modelagem Corporal')" class="mt-5 text-gold-dark text-sm font-semibold uppercase tracking-wider hover:gap-3 inline-flex items-center gap-2 transition-all">
+            Quero agendar →
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal bg-cream rounded-lg overflow-hidden card-hover" style="transition-delay: 0.5s">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Skinbooster" class="w-full h-full object-cover hover:scale-105 transition duration-700"></div>
+        <div class="p-6">
+          <h3 class="font-serif text-2xl text-ink font-bold">Skinbooster & Bioestímulo</h3>
+          <p class="mt-3 text-ink/70 text-sm leading-relaxed">Hidratação injetável profunda e estimulação de colágeno. Para uma pele luminosa e jovial por dentro.</p>
+          <button onclick="openAgenda('Skinbooster & Bioestímulo')" class="mt-5 text-gold-dark text-sm font-semibold uppercase tracking-wider hover:gap-3 inline-flex items-center gap-2 transition-all">
+            Quero agendar →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANTES E DEPOIS ============ -->
+<section id="resultados" class="py-24 md:py-32 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">resultados reais</span>
+      <div class="gold-divider mx-auto mt-3 mb-6"></div>
+      <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ink font-bold leading-tight text-balance max-w-3xl mx-auto">
+        Transformações que <em class="italic text-gold-dark">falam por si.</em>
+      </h2>
+      <p class="mt-6 text-ink/70 max-w-2xl mx-auto text-lg">
+        Cada antes e depois é uma história. Confira alguns dos resultados das nossas clientes.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="reveal group relative rounded-lg overflow-hidden aspect-[3/4]">
+        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Antes e Depois 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-cream">
+          <div class="text-xs uppercase tracking-wider text-gold-light mb-2">Harmonização Facial</div>
+          <div class="font-serif text-xl">Maria, 34 anos</div>
+          <div class="text-sm text-cream/80 mt-1">3 sessões · 60 dias</div>
+        </div>
+      </div>
+
+      <div class="reveal group relative rounded-lg overflow-hidden aspect-[3/4]" style="transition-delay: 0.1s">
+        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Antes e Depois 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-cream">
+          <div class="text-xs uppercase tracking-wider text-gold-light mb-2">Modelagem Corporal</div>
+          <div class="font-serif text-xl">Patricia, 41 anos</div>
+          <div class="text-sm text-cream/80 mt-1">10 sessões · 4 meses</div>
+        </div>
+      </div>
+
+      <div class="reveal group relative rounded-lg overflow-hidden aspect-[3/4]" style="transition-delay: 0.2s">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Antes e Depois 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-cream">
+          <div class="text-xs uppercase tracking-wider text-gold-light mb-2">Limpeza + Peeling</div>
+          <div class="font-serif text-xl">Camila, 27 anos</div>
+          <div class="text-sm text-cream/80 mt-1">5 sessões · 2 meses</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-12 reveal">
+      <button onclick="openAgenda()" class="bg-ink hover:bg-gold-dark text-cream px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-wider transition inline-flex items-center gap-2">
+        Quero meu resultado também
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AGENDAMENTO DESTAQUE ============ -->
+<section class="py-24 md:py-32 px-6 bg-ink relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-1/2 h-full opacity-20">
+    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="" class="w-full h-full object-cover">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/95 to-ink/40"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 items-center">
+    <div class="reveal">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-light font-semibold">vamos começar?</span>
+      <div class="w-16 h-px bg-gold mt-3 mb-6"></div>
+      <h2 class="font-serif text-4xl md:text-5xl text-cream font-bold leading-tight text-balance">
+        Sua primeira avaliação é por nossa <em class="italic text-gold-light">conta.</em>
+      </h2>
+      <p class="mt-6 text-cream/75 leading-relaxed text-lg">
+        Uma conversa de 30 minutos com nossa especialista para entender seus objetivos, avaliar sua pele e desenhar o protocolo ideal pra você. Sem compromisso.
+      </p>
+      <div class="mt-8 space-y-3">
+        <div class="flex items-center gap-3 text-cream/80"><div class="w-6 h-6 rounded-full bg-gold flex items-center justify-center flex-shrink-0"><span class="text-ink text-xs font-bold">✓</span></div> Avaliação personalizada</div>
+        <div class="flex items-center gap-3 text-cream/80"><div class="w-6 h-6 rounded-full bg-gold flex items-center justify-center flex-shrink-0"><span class="text-ink text-xs font-bold">✓</span></div> Plano de tratamento sob medida</div>
+        <div class="flex items-center gap-3 text-cream/80"><div class="w-6 h-6 rounded-full bg-gold flex items-center justify-center flex-shrink-0"><span class="text-ink text-xs font-bold">✓</span></div> Condições especiais na 1ª sessão</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay: 0.1s">
+      <div class="bg-cream rounded-lg p-8 shadow-2xl">
+        <div class="text-center mb-6">
+          <div class="font-serif text-2xl text-ink font-bold">Agende sua avaliação</div>
+          <div class="text-sm text-ink/60 mt-1">Resposta em até 30 minutos</div>
+        </div>
+        <form id="quickAgenda" onsubmit="submitAgenda(event)" class="space-y-3">
+          <input type="text" name="nome" placeholder="Seu nome" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white">
+          <input type="tel" name="telefone" placeholder="Seu WhatsApp (DDD + número)" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white">
+          <select name="procedimento" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white">
+            <option value="">Qual tratamento te interessa?</option>
+            <option>Harmonização Facial</option>
+            <option>Depilação a Laser</option>
+            <option>Limpeza de Pele Profunda</option>
+            <option>Microagulhamento</option>
+            <option>Modelagem Corporal</option>
+            <option>Skinbooster & Bioestímulo</option>
+            <option>Quero conhecer todos os tratamentos</option>
+          </select>
+          <button type="submit" class="w-full bg-gold hover:bg-gold-dark text-ink py-4 rounded-lg font-semibold uppercase tracking-wider text-sm transition">
+            Agendar pelo WhatsApp
+          </button>
+          <p class="text-xs text-ink/50 text-center pt-2">Ao clicar, você será direcionada para nosso WhatsApp.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOIMENTOS ============ -->
+<section id="depoimentos" class="py-24 md:py-32 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">elas amaram</span>
+      <div class="gold-divider mx-auto mt-3 mb-6"></div>
+      <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ink font-bold leading-tight text-balance max-w-3xl mx-auto">
+        O que dizem nossas <em class="italic text-gold-dark">clientes.</em>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="reveal bg-beige/40 rounded-lg p-8 card-hover">
+        <div class="flex text-gold mb-4">★★★★★</div>
+        <p class="text-ink/80 leading-relaxed italic">"Fiz harmonização facial e fiquei encantada com o resultado. A Dra. Helena entendeu exatamente o que eu queria — natural, sem exagero. Hoje me sinto mais bonita e confiante."</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-cream font-serif font-bold">M</div>
+          <div>
+            <div class="font-semibold text-ink">Mariana C.</div>
+            <div class="text-xs text-ink/60">Cliente desde 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal bg-beige/40 rounded-lg p-8 card-hover" style="transition-delay: 0.1s">
+        <div class="flex text-gold mb-4">★★★★★</div>
+        <p class="text-ink/80 leading-relaxed italic">"Atendimento impecável do início ao fim. Os resultados da depilação a laser superaram minha expectativa. Recomendo de olhos fechados — a Lumière virou minha clínica de cabeceira."</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-cream font-serif font-bold">P</div>
+          <div>
+            <div class="font-semibold text-ink">Patricia M.</div>
+            <div class="text-xs text-ink/60">Cliente desde 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal bg-beige/40 rounded-lg p-8 card-hover" style="transition-delay: 0.2s">
+        <div class="flex text-gold mb-4">★★★★★</div>
+        <p class="text-ink/80 leading-relaxed italic">"Já passei por várias clínicas e nenhuma me ofereceu o cuidado que recebi aqui. O ambiente é lindo, a equipe é atenciosa e os tratamentos são de verdade. Vale cada centavo."</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-cream font-serif font-bold">C</div>
+          <div>
+            <div class="font-semibold text-ink">Camila R.</div>
+            <div class="text-xs text-ink/60">Cliente desde 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="py-24 md:py-32 px-6 bg-beige/50">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">dúvidas frequentes</span>
+      <div class="gold-divider mx-auto mt-3 mb-6"></div>
+      <h2 class="font-serif text-4xl md:text-5xl text-ink font-bold leading-tight text-balance">Tirando suas <em class="italic text-gold-dark">dúvidas.</em></h2>
+    </div>
+
+    <div class="space-y-3" id="faq-list">
+      <!-- FAQ items -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCALIZAÇÃO ============ -->
+<section id="localizacao" class="py-24 md:py-32 px-6">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="reveal">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">venha nos visitar</span>
+      <div class="gold-divider mt-3 mb-6"></div>
+      <h2 class="font-serif text-4xl md:text-5xl text-ink font-bold leading-tight text-balance">
+        Estamos no coração de <em class="italic text-gold-dark">Goiânia.</em>
+      </h2>
+      <p class="mt-6 text-ink/70 leading-relaxed text-lg">Espaço acolhedor pensado para o seu bem-estar. Fácil acesso, estacionamento próprio e ambiente climatizado.</p>
+
+      <div class="mt-8 space-y-4">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-ink">Endereço</div>
+            <div class="text-ink/70 text-sm">Av. T-9, 1234 · Setor Bueno<br>Goiânia · GO · 74230-000</div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-ink">Horários</div>
+            <div class="text-ink/70 text-sm">Segunda a sexta: 9h às 19h<br>Sábado: 9h às 14h</div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-ink">Contato</div>
+            <div class="text-ink/70 text-sm">(62) 98161-5395<br>contato@lumiere-estetica.com.br</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://wa.me/5562981615395?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." class="mt-8 inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ea954] text-white px-6 py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+        Falar agora
+      </a>
+    </div>
+
+    <div class="reveal" style="transition-delay: 0.1s">
+      <div class="rounded-lg overflow-hidden shadow-2xl">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-49.270%2C-16.722%2C-49.255%2C-16.708&layer=mapnik" class="w-full h-96 border-0" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="py-24 md:py-32 px-6 bg-gradient-to-br from-beige to-cream">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">última chamada</span>
+    <div class="gold-divider mx-auto mt-3 mb-6"></div>
+    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ink font-bold leading-tight text-balance">
+      O melhor momento pra começar é <em class="italic text-gold-dark">agora.</em>
+    </h2>
+    <p class="mt-6 text-ink/70 text-lg max-w-xl mx-auto">Agende sua avaliação gratuita e descubra o protocolo ideal para os seus objetivos.</p>
+    <button onclick="openAgenda()" class="mt-10 bg-ink hover:bg-gold-dark text-cream px-10 py-5 rounded-full text-sm font-semibold uppercase tracking-wider transition inline-flex items-center gap-3 shadow-xl">
+      Agendar minha avaliação
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink text-cream/80 py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-8 mb-12">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-cream font-serif font-bold text-lg">L</div>
+          <div>
+            <div class="font-serif text-xl text-cream font-bold leading-none">Lumière</div>
+            <div class="text-[10px] uppercase tracking-[0.2em] text-gold mt-0.5">Estética Avançada</div>
+          </div>
+        </div>
+        <p class="text-cream/70 text-sm max-w-md leading-relaxed">Cuidado, técnica e excelência em estética avançada. Goiânia, GO.</p>
+        <div class="flex gap-3 mt-6">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-ink transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-ink transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg></a>
+          <a href="https://wa.me/5562981615395" aria-label="WhatsApp" class="w-10 h-10 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-ink transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-cream font-semibold mb-4 text-sm uppercase tracking-wider">Tratamentos</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#procedimentos" class="hover:text-gold transition">Harmonização Facial</a></li>
+          <li><a href="#procedimentos" class="hover:text-gold transition">Depilação a Laser</a></li>
+          <li><a href="#procedimentos" class="hover:text-gold transition">Limpeza de Pele</a></li>
+          <li><a href="#procedimentos" class="hover:text-gold transition">Microagulhamento</a></li>
+          <li><a href="#procedimentos" class="hover:text-gold transition">Modelagem Corporal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-cream font-semibold mb-4 text-sm uppercase tracking-wider">Visite</div>
+        <ul class="space-y-2 text-sm">
+          <li>Av. T-9, 1234 · Setor Bueno</li>
+          <li>Goiânia · GO</li>
+          <li>(62) 98161-5395</li>
+          <li>Seg-Sex: 9h-19h</li>
+          <li>Sáb: 9h-14h</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between gap-4 text-xs text-cream/50">
+      <div>© 2026 Lumière Estética. Todos os direitos reservados.</div>
+      <div>Desenvolvido por <a href="#" class="text-gold hover:text-gold-light">VX Nacional</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ BOTÃO FLUTUANTE WHATSAPP ============ -->
+<a href="https://wa.me/5562981615395?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Lumi%C3%A8re%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." aria-label="Falar no WhatsApp" class="whatsapp-pulse fixed bottom-6 right-6 z-30 w-16 h-16 rounded-full bg-[#25D366] hover:bg-[#1ea954] text-white flex items-center justify-center shadow-2xl transition">
+  <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+</a>
+
+<!-- ============ MODAL AGENDAMENTO ============ -->
+<div id="agendaModal" class="fixed inset-0 z-50 hidden modal-overlay bg-ink/70 flex items-center justify-center p-4">
+  <div class="bg-cream rounded-lg max-w-md w-full p-8 max-h-[90vh] overflow-y-auto shadow-2xl">
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <div class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">agendamento</div>
+        <h3 class="font-serif text-2xl text-ink font-bold mt-2">Vamos marcar sua avaliação</h3>
+        <p class="text-sm text-ink/60 mt-1">Preencha os dados e te chamamos no WhatsApp</p>
+      </div>
+      <button onclick="closeAgenda()" class="text-3xl text-ink/40 hover:text-ink transition">×</button>
+    </div>
+
+    <form id="fullAgenda" onsubmit="submitAgenda(event, true)" class="space-y-3">
+      <div>
+        <label class="text-xs font-semibold text-ink/70 uppercase tracking-wider">Nome completo</label>
+        <input type="text" name="nome" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white mt-1">
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-ink/70 uppercase tracking-wider">WhatsApp</label>
+        <input type="tel" name="telefone" placeholder="(62) 9 9999-9999" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white mt-1">
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-ink/70 uppercase tracking-wider">Procedimento de interesse</label>
+        <select name="procedimento" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white mt-1" id="modalProc">
+          <option value="">Selecione...</option>
+          <option>Harmonização Facial</option>
+          <option>Depilação a Laser</option>
+          <option>Limpeza de Pele Profunda</option>
+          <option>Microagulhamento</option>
+          <option>Modelagem Corporal</option>
+          <option>Skinbooster & Bioestímulo</option>
+          <option>Quero conhecer todos os tratamentos</option>
+        </select>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="text-xs font-semibold text-ink/70 uppercase tracking-wider">Dia preferido</label>
+          <input type="date" name="data" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white mt-1">
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-ink/70 uppercase tracking-wider">Período</label>
+          <select name="periodo" required class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white mt-1">
+            <option value="">Selecione</option>
+            <option>Manhã</option>
+            <option>Tarde</option>
+            <option>Final de tarde</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-ink/70 uppercase tracking-wider">Observação <span class="text-ink/40">(opcional)</span></label>
+        <textarea name="obs" rows="2" class="w-full px-4 py-3 rounded-lg border border-ink/15 text-sm bg-white mt-1 resize-none"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-gold hover:bg-gold-dark text-ink py-4 rounded-lg font-semibold uppercase tracking-wider text-sm transition mt-2">
+        Enviar pelo WhatsApp
+      </button>
+      <p class="text-xs text-ink/50 text-center pt-1">Vamos confirmar sua avaliação em até 30 minutos.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  // ============ CONFIG ============
+  // Numero do WhatsApp no formato internacional (sem +, sem espacos, sem hifens)
+  const WHATSAPP_NUMBER = '5562981615395';
+  const CLINICA_NOME = 'Lumière Estética';
+
+  // ============ AGENDAMENTO ============
+  function openAgenda(procedimento) {
+    const modal = document.getElementById('agendaModal');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    if (procedimento) {
+      const sel = document.getElementById('modalProc');
+      [...sel.options].forEach(o => { if (o.value === procedimento) sel.value = procedimento; });
+    }
+  }
+  function closeAgenda() {
+    document.getElementById('agendaModal').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('agendaModal').addEventListener('click', (e) => {
+    if (e.target.id === 'agendaModal') closeAgenda();
+  });
+
+  function submitAgenda(event, isModal) {
+    event.preventDefault();
+    const form = event.target;
+    const data = new FormData(form);
+    const nome = data.get('nome') || '';
+    const tel = data.get('telefone') || '';
+    const proc = data.get('procedimento') || '';
+    const dia = data.get('data') || '';
+    const periodo = data.get('periodo') || '';
+    const obs = data.get('obs') || '';
+
+    let msg = `Olá, ${CLINICA_NOME}! Quero agendar uma avaliação.\n\n`;
+    msg += `*Nome:* ${nome}\n`;
+    msg += `*WhatsApp:* ${tel}\n`;
+    msg += `*Procedimento:* ${proc}\n`;
+    if (dia) msg += `*Dia preferido:* ${formatDate(dia)}\n`;
+    if (periodo) msg += `*Período:* ${periodo}\n`;
+    if (obs) msg += `*Observação:* ${obs}\n`;
+    msg += `\nObrigada!`;
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+    if (isModal) setTimeout(closeAgenda, 500);
+    form.reset();
+  }
+  function formatDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  // ============ MENU MOBILE ============
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // ============ HEADER SCROLL ============
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      header.classList.add('bg-cream/90', 'backdrop-blur-md', 'shadow-sm');
+    } else {
+      header.classList.remove('bg-cream/90', 'backdrop-blur-md', 'shadow-sm');
+    }
+  });
+
+  // ============ REVEAL ON SCROLL ============
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ============ FAQ ============
+  const FAQ = [
+    { q: 'Preciso pagar a primeira avaliação?', a: 'Não. A primeira avaliação é gratuita. Sem compromisso de fechamento — é só pra entender seus objetivos e desenhar o protocolo ideal.' },
+    { q: 'Quanto tempo leva pra ver resultado?', a: 'Depende do procedimento. Limpeza de pele tem efeito imediato. Harmonização facial mostra resultado em 7 a 15 dias. Modelagem corporal aparece a partir da 4ª sessão. Te explicamos tudo na avaliação.' },
+    { q: 'Trabalham com convênio ou parcelamento?', a: 'Não atendemos por convênio, mas oferecemos parcelamento em até 12x no cartão e descontos especiais para pacotes fechados.' },
+    { q: 'Qual a idade mínima para os tratamentos?', a: 'A maioria dos nossos tratamentos é indicada a partir dos 18 anos. Para menores de idade, é necessária autorização e acompanhamento responsável.' },
+    { q: 'É seguro? Quem realiza os procedimentos?', a: 'Sim. Todos os procedimentos são realizados por médicos, biomédicos e esteticistas com registro ativo. Usamos apenas marcas certificadas pela Anvisa.' },
+    { q: 'E se eu não gostar do resultado?', a: 'Acompanhamos cada cliente de perto e fazemos ajustes quando necessário, sem custo adicional. Sua satisfação é nossa prioridade.' },
+  ];
+  const faqList = document.getElementById('faq-list');
+  FAQ.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'bg-cream rounded-lg border border-ink/10 overflow-hidden';
+    div.innerHTML = `
+      <button onclick="toggleFaq(${i})" class="w-full text-left p-5 flex justify-between items-center gap-4 hover:bg-beige/40 transition">
+        <span class="font-semibold text-ink">${item.q}</span>
+        <span class="text-2xl text-gold transition-transform" id="faq-icon-${i}">+</span>
+      </button>
+      <div id="faq-ans-${i}" class="hidden px-5 pb-5 text-ink/70 leading-relaxed text-sm">${item.a}</div>
+    `;
+    faqList.appendChild(div);
+  });
+  function toggleFaq(i) {
+    const ans = document.getElementById(`faq-ans-${i}`);
+    const icon = document.getElementById(`faq-icon-${i}`);
+    ans.classList.toggle('hidden');
+    icon.textContent = ans.classList.contains('hidden') ? '+' : '−';
+  }
+
+  // ESC fecha modal
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAgenda(); });
+</script>
+</body>
+</html>
